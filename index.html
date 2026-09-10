@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Simulador interactivo del proceso de requisición y compra" />
-    <title>Procura | Caso de estudio</title>
+    <meta name="description" content="Interactive procurement process case study" />
+    <title>Procura | Case Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -16,55 +16,55 @@
         <div class="brand-lockup">
           <div class="brand-mark">P</div>
           <div>
-            <p class="eyebrow">Caso de estudio · Compras</p>
+            <p class="eyebrow">Case study · Procurement</p>
             <h1>Procura<span>/</span>flow</h1>
           </div>
         </div>
         <div class="topbar-actions">
-          <span class="status-pill"><span class="status-dot"></span> Simulación activa</span>
-          <button class="icon-button" id="reset-button" title="Reiniciar caso" aria-label="Reiniciar caso">↻</button>
+          <span class="status-pill"><span class="status-dot"></span> Live simulation</span>
+          <button class="icon-button" id="reset-button" title="Reset case" aria-label="Reset case">↻</button>
         </div>
       </header>
 
       <main class="workspace">
         <section class="intro-row">
           <div>
-            <p class="eyebrow accent">Flujo operativo 01</p>
-            <h2>De la requisición<br /><em>a la entrega.</em></h2>
+            <p class="eyebrow accent">Operational flow 01</p>
+            <h2>From request<br /><em>to delivery.</em></h2>
           </div>
           <div class="intro-copy">
-            <p>Explora el proceso de compra de un producto. Avanza por cada decisión del diagrama y observa cómo colaboran los cinco roles.</p>
-            <div class="case-meta"><span>CASO ACTUAL</span><strong id="case-name">Equipamiento de oficina</strong></div>
+            <p>Explore the procurement process for a product. Move through each decision in the diagram and see how the five roles collaborate.</p>
+            <div class="case-meta"><span>ACTIVE CASE</span><strong id="case-name">Office equipment</strong></div>
           </div>
         </section>
 
-        <section class="progress-strip" aria-label="Progreso del caso">
-          <div class="progress-label"><span id="progress-step">Paso 1 de 9</span><strong id="progress-percent">11%</strong></div>
+        <section class="progress-strip" aria-label="Case progress">
+          <div class="progress-label"><span id="progress-step">Step 1 of 9</span><strong id="progress-percent">11%</strong></div>
           <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
         </section>
 
         <section class="dashboard-grid">
           <aside class="roles-panel">
-            <div class="section-heading"><span>01</span><h3>Participantes</h3></div>
-            <p class="muted">Responsables involucrados en el proceso.</p>
+            <div class="section-heading"><span>01</span><h3>Participants</h3></div>
+            <p class="muted">People involved in the process.</p>
             <div class="role-list" id="role-list"></div>
-            <div class="legend-box"><span class="legend-line"></span><span>Rol activo en la etapa actual</span></div>
+            <div class="legend-box"><span class="legend-line"></span><span>Active role for current stage</span></div>
           </aside>
 
-          <section class="flow-panel">
-            <div class="section-heading flow-heading"><div><span>02</span><h3>Flujo de decisión</h3></div><span class="flow-state" id="flow-state">En preparación</span></div>
+            <section class="flow-panel">
+            <div class="section-heading flow-heading"><div><span>02</span><h3>Decision flow</h3></div><span class="flow-state" id="flow-state">Preparing</span></div>
             <div class="flow-canvas" id="flow-canvas"></div>
           </section>
 
           <aside class="detail-panel">
-            <div class="section-heading"><span>03</span><h3>Control de etapa</h3></div>
+            <div class="section-heading"><span>03</span><h3>Stage control</h3></div>
             <div id="detail-content"></div>
           </aside>
         </section>
 
         <section class="activity-panel">
-          <div class="section-heading"><span>04</span><h3>Bitácora del caso</h3><span class="activity-count" id="activity-count">0 eventos</span></div>
-          <div class="activity-list" id="activity-list"><div class="empty-activity">Los eventos del proceso aparecerán aquí.</div></div>
+          <div class="section-heading"><span>04</span><h3>Case activity log</h3><span class="activity-count" id="activity-count">0 events</span></div>
+          <div class="activity-list" id="activity-list"><div class="empty-activity">Process events will appear here.</div></div>
         </section>
       </main>
       <footer><span>MODELO BASADO EN DIAGRAMA BPMN</span><span>PROCURA / 2026</span></footer>

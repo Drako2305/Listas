@@ -13,23 +13,23 @@ type Stage = {
 type Activity = { role: string; message: string };
 
 const roles: Record<RoleId, { name: string; description: string; icon: string }> = {
-  requester: { name: "Solicitante", description: "Inicia la necesidad", icon: "↗" },
-  buyer: { name: "Agente comprador", description: "Gestiona la RFQ", icon: "◈" },
-  supervisor: { name: "Supervisor", description: "Evalúa y aprueba", icon: "◉" },
-  seller: { name: "Proveedor", description: "Envía cotización", icon: "◇" },
-  receiver: { name: "Recepción", description: "Confirma entrega", icon: "✓" },
+  requester: { name: "Requester", description: "Starts the request", icon: "↗" },
+  buyer: { name: "Buyer agent", description: "Manages the RFQ", icon: "◈" },
+  supervisor: { name: "Supervisor", description: "Reviews and approves", icon: "◉" },
+  seller: { name: "Supplier", description: "Sends the quote", icon: "◇" },
+  receiver: { name: "Receiving agent", description: "Confirms delivery", icon: "✓" },
 };
 
 const stages: Stage[] = [
-  { id: "requisition", title: "Preparar requisición", role: "requester", description: "Define qué necesita el área, la cantidad y la fecha límite para recibirlo.", action: "Enviar requisición" },
-  { id: "rfq", title: "Preparar solicitud de cotización", role: "buyer", description: "El agente comprador transforma la requisición en una RFQ para el proveedor.", action: "Enviar RFQ" },
-  { id: "review", title: "Revisar requisición", role: "supervisor", description: "Se valida que la solicitud tenga justificación, presupuesto y prioridad.", action: "Pasar a evaluación", decision: { yes: "Aprobar revisión", no: "Solicitar cambios" } },
-  { id: "quote", title: "Preparar cotización", role: "seller", description: "El proveedor revisa la solicitud y propone precio, condiciones y fecha de entrega.", action: "Enviar cotización" },
-  { id: "evaluate", title: "Evaluar cotización", role: "buyer", description: "Se comparan las condiciones recibidas antes de tomar una decisión.", action: "Enviar a aprobación" },
-  { id: "approval", title: "¿Aprueba la cotización?", role: "supervisor", description: "El supervisor decide si la propuesta responde a la necesidad y al presupuesto.", action: "Registrar decisión", decision: { yes: "Aprobar cotización", no: "Rechazar cotización" } },
-  { id: "order", title: "Preparar orden", role: "buyer", description: "La cotización aprobada se convierte en una orden formal para el proveedor.", action: "Emitir orden" },
-  { id: "delivery", title: "Cumplir orden", role: "seller", description: "El proveedor prepara y despacha el producto solicitado.", action: "Marcar como enviado" },
-  { id: "received", title: "Recibir producto", role: "receiver", description: "Recepción confirma que el producto llegó completo y registra la entrega.", action: "Confirmar recepción" },
+  { id: "requisition", title: "Prepare request", role: "requester", description: "Define what the department needs, the quantity, and the required delivery date.", action: "Submit request" },
+  { id: "rfq", title: "Prepare request for quote", role: "buyer", description: "The buyer agent turns the request into an RFQ for the supplier.", action: "Send RFQ" },
+  { id: "review", title: "Review request", role: "supervisor", description: "The request is checked for justification, budget, and priority.", action: "Send for evaluation", decision: { yes: "Approve review", no: "Request changes" } },
+  { id: "quote", title: "Prepare quotation", role: "seller", description: "The supplier reviews the request and proposes price, terms, and delivery date.", action: "Send quotation" },
+  { id: "evaluate", title: "Evaluate quotation", role: "buyer", description: "The received terms are compared before a decision is made.", action: "Send for approval" },
+  { id: "approval", title: "Approve quotation?", role: "supervisor", description: "The supervisor decides whether the proposal meets the need and budget.", action: "Record decision", decision: { yes: "Approve quotation", no: "Reject quotation" } },
+  { id: "order", title: "Prepare order", role: "buyer", description: "The approved quotation becomes a formal order for the supplier.", action: "Issue order" },
+  { id: "delivery", title: "Fulfill order", role: "seller", description: "The supplier prepares and ships the requested product.", action: "Mark as shipped" },
+  { id: "received", title: "Receive product", role: "receiver", description: "Receiving confirms the product arrived complete and records the delivery.", action: "Confirm receipt" },
 ];
 
 const state = { stageIndex: 0, activities: [] as Activity[] };
@@ -64,11 +64,11 @@ function renderDetails(): void {
     </div>` : `<button class="primary-button" id="advance-button">${stage.action} <span>→</span></button>`;
 
   byId("detail-content").innerHTML = `
-    <p class="detail-kicker">${role.name} · Etapa ${state.stageIndex + 1}</p>
+    <p class="detail-kicker">${role.name} · Stage ${state.stageIndex + 1}</p>
     <h4 class="detail-title">${stage.title}</h4>
     <p class="detail-copy">${stage.description}</p>
-    ${state.stageIndex === 0 ? `<div class="detail-form"><label>Producto<input id="product-input" value="Sillas ergonómicas" /></label><label>Cantidad<input id="quantity-input" type="number" min="1" value="24" /></label></div>` : ""}
-    ${state.stageIndex === 3 ? `<div class="detail-form"><label>Proveedor<select id="supplier-input"><option>OfiSupply S.A.</option><option>ErgoWorld Ltd.</option></select></label><label>Total cotizado<input id="amount-input" value="$ 2.880,00" /></label></div>` : ""}
+    ${state.stageIndex === 0 ? `<div class="detail-form"><label>Product<input id="product-input" value="Ergonomic chairs" /></label><label>Quantity<input id="quantity-input" type="number" min="1" value="24" /></label></div>` : ""}
+    ${state.stageIndex === 3 ? `<div class="detail-form"><label>Supplier<select id="supplier-input"><option>OfiSupply Inc.</option><option>ErgoWorld Ltd.</option></select></label><label>Quoted total<input id="amount-input" value="$ 2,880.00" /></label></div>` : ""}
     ${decisionMarkup}`;
 
   const advanceButton = document.getElementById("advance-button");
@@ -80,16 +80,16 @@ function renderDetails(): void {
 
 function renderActivity(): void {
   const list = byId("activity-list");
-  byId("activity-count").textContent = `${state.activities.length} evento${state.activities.length === 1 ? "" : "s"}`;
-  list.innerHTML = state.activities.length ? state.activities.map((activity, index) => `<div class="activity-event"><strong>${String(index + 1).padStart(2, "0")} · ${activity.role}</strong> ${activity.message}</div>`).join("") : `<div class="empty-activity">Los eventos del proceso aparecerán aquí.</div>`;
+  byId("activity-count").textContent = `${state.activities.length} event${state.activities.length === 1 ? "" : "s"}`;
+  list.innerHTML = state.activities.length ? state.activities.map((activity, index) => `<div class="activity-event"><strong>${String(index + 1).padStart(2, "0")} · ${activity.role}</strong> ${activity.message}</div>`).join("") : `<div class="empty-activity">Process events will appear here.</div>`;
 }
 
 function renderProgress(): void {
   const percent = Math.round(((state.stageIndex + 1) / stages.length) * 100);
-  byId("progress-step").textContent = `Paso ${state.stageIndex + 1} de ${stages.length}`;
+  byId("progress-step").textContent = `Step ${state.stageIndex + 1} of ${stages.length}`;
   byId("progress-percent").textContent = `${percent}%`;
   byId("progress-fill").style.width = `${percent}%`;
-  byId("flow-state").textContent = state.stageIndex === stages.length - 1 ? "Caso completado" : "En ejecución";
+  byId("flow-state").textContent = state.stageIndex === stages.length - 1 ? "Case completed" : "In progress";
 }
 
 function render(): void {
@@ -100,13 +100,13 @@ function advance(message: string): void {
   const stage = stages[state.stageIndex];
   let finalMessage = message;
   if (stage.id === "requisition") {
-    const product = (document.getElementById("product-input") as HTMLInputElement)?.value || "Producto solicitado";
+    const product = (document.getElementById("product-input") as HTMLInputElement)?.value || "Requested product";
     const quantity = (document.getElementById("quantity-input") as HTMLInputElement)?.value || "1";
-    finalMessage = `Requisición creada: ${quantity} × ${product}`;
+    finalMessage = `Request created: ${quantity} × ${product}`;
   }
   if (stage.id === "quote") {
-    const supplier = (document.getElementById("supplier-input") as HTMLSelectElement)?.value || "Proveedor seleccionado";
-    finalMessage = `Cotización recibida de ${supplier}`;
+    const supplier = (document.getElementById("supplier-input") as HTMLSelectElement)?.value || "Selected supplier";
+    finalMessage = `Quotation received from ${supplier}`;
   }
   state.activities.push({ role: roles[stage.role].name, message: finalMessage });
   if (state.stageIndex < stages.length - 1) state.stageIndex += 1;
@@ -116,7 +116,7 @@ function advance(message: string): void {
 function decide(decision: Decision): void {
   const stage = stages[state.stageIndex];
   const approved = decision === "approve";
-  state.activities.push({ role: roles[stage.role].name, message: approved ? "Decisión aprobada: el flujo continúa" : "Se solicita una nueva revisión de la propuesta" });
+  state.activities.push({ role: roles[stage.role].name, message: approved ? "Decision approved: the flow continues" : "A new proposal review is requested" });
   if (stage.id === "review" && !approved) state.stageIndex = 0;
   else if (stage.id === "approval" && !approved) state.stageIndex = 3;
   else if (state.stageIndex < stages.length - 1) state.stageIndex += 1;
