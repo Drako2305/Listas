@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Simulador interactivo del proceso de requisición y compra" />
+    <title>Procura | Caso de estudio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <div class="brand-mark">P</div>
+          <div>
+            <p class="eyebrow">Caso de estudio · Compras</p>
+            <h1>Procura<span>/</span>flow</h1>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span class="status-pill"><span class="status-dot"></span> Simulación activa</span>
+          <button class="icon-button" id="reset-button" title="Reiniciar caso" aria-label="Reiniciar caso">↻</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="intro-row">
+          <div>
+            <p class="eyebrow accent">Flujo operativo 01</p>
+            <h2>De la requisición<br /><em>a la entrega.</em></h2>
+          </div>
+          <div class="intro-copy">
+            <p>Explora el proceso de compra de un producto. Avanza por cada decisión del diagrama y observa cómo colaboran los cinco roles.</p>
+            <div class="case-meta"><span>CASO ACTUAL</span><strong id="case-name">Equipamiento de oficina</strong></div>
+          </div>
+        </section>
+
+        <section class="progress-strip" aria-label="Progreso del caso">
+          <div class="progress-label"><span id="progress-step">Paso 1 de 9</span><strong id="progress-percent">11%</strong></div>
+          <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        </section>
+
+        <section class="dashboard-grid">
+          <aside class="roles-panel">
+            <div class="section-heading"><span>01</span><h3>Participantes</h3></div>
+            <p class="muted">Responsables involucrados en el proceso.</p>
+            <div class="role-list" id="role-list"></div>
+            <div class="legend-box"><span class="legend-line"></span><span>Rol activo en la etapa actual</span></div>
+          </aside>
+
+          <section class="flow-panel">
+            <div class="section-heading flow-heading"><div><span>02</span><h3>Flujo de decisión</h3></div><span class="flow-state" id="flow-state">En preparación</span></div>
+            <div class="flow-canvas" id="flow-canvas"></div>
+          </section>
+
+          <aside class="detail-panel">
+            <div class="section-heading"><span>03</span><h3>Control de etapa</h3></div>
+            <div id="detail-content"></div>
+          </aside>
+        </section>
+
+        <section class="activity-panel">
+          <div class="section-heading"><span>04</span><h3>Bitácora del caso</h3><span class="activity-count" id="activity-count">0 eventos</span></div>
+          <div class="activity-list" id="activity-list"><div class="empty-activity">Los eventos del proceso aparecerán aquí.</div></div>
+        </section>
+      </main>
+      <footer><span>MODELO BASADO EN DIAGRAMA BPMN</span><span>PROCURA / 2026</span></footer>
+    </div>
+    <script type="module" src="dist/main.js"></script>
+  </body>
+</html>
